@@ -1,0 +1,77 @@
+body {
+    background-color: black !important;
+    background-image: url('../images/wallpaperflare.com_wallpaper.jpg') !important;
+    color:black;
+    background-repeat: no-repeat;
+    background-size: contain !important;
+    
+}
+
+
+@font-face {
+    font-family: marsBold;
+    src: url("../fonts/Mars/Mars-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: marsThin;
+    src: url("../fonts/Mars/Mars-Thin.ttf") format("truetype");
+}
+
+#mars-header{
+    font-family: marsBold !important;
+    margin-top: 4vh;
+}
+
+@media (max-width: 800px) {
+    #mars-header{
+        font-size: 3rem;
+    }
+    
+}
+
+.MuiCardHeader-title{
+    font-family: marsBold !important;
+}
+
+.Nav > *{
+    background-color: white!important;
+    border-radius: 4px;
+}
+
+.Nav{
+    width: 100% ;
+    padding: 24px;
+    border-radius: 4px;
+}
+
+.Nav > div.MuiBox-root.css-1kwdaty{
+    justify-content: space-between;
+    padding: 2%;
+}
+
+.MuiTabs-flexContainer.css-heg063-MuiTabs-flexContainer{
+    flex-wrap: wrap;
+}
+
+.MuiStack-root.css-1xhypcz-MuiStack-root{
+    overflow: visible;
+}
+
+span.MuiTabs-indicator{
+    display: none !important;
+}
+
+button.Mui-selected{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+div.MuiBox-root.css-18m5ng9{
+    margin: 0;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+}
