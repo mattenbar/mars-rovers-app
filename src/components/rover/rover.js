@@ -13,6 +13,7 @@ export default function Rover(props) {
 
   let currentRover = {};
  
+  
 
   if (Object.keys(rovers).length > 0) {
     console.log(rovers);
