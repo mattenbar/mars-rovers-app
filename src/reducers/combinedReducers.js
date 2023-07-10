@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import roverReducer from './roverReducer'
+import roversReducer from './RoversReducer'
 
-
-
-export default combineReducers({
-  rovers: roverReducer,
-  
+const rootReducer = combineReducers({
+  // Define a top-level state field named `todos`, handled by `todosReducer`
+  rovers: roversReducer,
 })
+
+export default rootReducer

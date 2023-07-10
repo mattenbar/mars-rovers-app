@@ -5,6 +5,7 @@ body {
     background-repeat: no-repeat;
     background-size: contain !important;
     
+    
 }
 
 
@@ -21,6 +22,7 @@ body {
 #mars-header{
     font-family: marsBold !important;
     margin-top: 4vh;
+    font-size: 5rem;
 }
 
 @media (max-width: 800px) {
@@ -45,10 +47,10 @@ body {
     border-radius: 4px;
 }
 
-.Nav > div.MuiBox-root.css-1kwdaty{
+/* .Nav > div.MuiBox-root.css-1kwdaty{
     justify-content: space-between;
     padding: 2%;
-}
+} */
 
 .MuiTabs-flexContainer.css-heg063-MuiTabs-flexContainer{
     flex-wrap: wrap;
@@ -74,4 +76,8 @@ div.MuiBox-root.css-18m5ng9{
     top: 0;
     background-color: white;
     z-index: 2;
+}
+header{
+    margin: auto;
+    max-width: 1200px;
 }

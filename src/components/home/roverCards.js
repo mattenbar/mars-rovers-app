@@ -56,8 +56,8 @@ export default function RoverCard(props) {
   };
 
   return (
-    <Card id={props.rover.name} key={props.rover.id} sx={{ maxWidth: 600 }}>
-      <CardHeader title={props.rover.name} />
+    <Card id={props.rover.name} key={props.rover.id} sx={{ maxWidth: 600, textAlign:'center' }}>
+      <CardHeader  title={props.rover.name} />
       <CardMedia
         component="img"
         height="300"

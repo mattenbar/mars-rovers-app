@@ -19,6 +19,8 @@ import axios from "axios";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
+
+
   return (
     <div
       role="tabpanel"
@@ -72,6 +74,9 @@ export default function BasicTabs(props) {
   const [date, setDate] = React.useState(startDate);
   const [photos, setPhotos] = useState({ photos: [] });
   const [roverName] = useState(props.rover.name);
+
+  console.log('BasicTabs')
+  console.log(props)
 
   useEffect(() => {
     const fetchData = async (roverName, date) => {
@@ -179,7 +184,3 @@ export default function BasicTabs(props) {
   );
 }
 
-// const today = moment().format("YYYY-MM-DD");
-//   const [photos, setPhotos] = useState({ photos: [] });
-//   const [roverName, setRoverName] = useState(props.rover.name);
-//   const [date, setDate] = useState(today);
