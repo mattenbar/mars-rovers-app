@@ -49,7 +49,7 @@ export default function RoverCard(props) {
 
   const cameras = () => {
     return props.rover.cameras.map((c) => (
-      <Typography variant="body2" fontSize="16px" color="text.main">
+      <Typography key={c.name} variant="body2" fontSize="16px" color="text.main">
         {c.name}
       </Typography>
     ));

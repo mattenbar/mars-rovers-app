@@ -18,7 +18,7 @@ const checkDate = (maxDate) => {
 
 var today = moment().format('YYYY-MM-DD')
 
-const FetchPhotos = (data = "curiosity", date = today) => {
+export function fetchPhotos(data = "curiosity", date = today){
 
   var dateCheck = checkDate(data['max_date'])
   dateCheck = dateCheck.format('YYYY-MM-DD')
@@ -34,4 +34,4 @@ const FetchPhotos = (data = "curiosity", date = today) => {
     });
 };
 
-export default FetchPhotos;
+

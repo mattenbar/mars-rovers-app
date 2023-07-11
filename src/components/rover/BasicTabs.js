@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -13,13 +13,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment-hijri";
 import { API_KEY, API_URL } from "../../apiConstants";
 
-import { useState, useEffect } from "react";
 import axios from "axios";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
-
 
   return (
     <div
@@ -70,15 +67,13 @@ export default function BasicTabs(props) {
   var startDate = checkDate(maxDate);
   startDate = dayjs(startDate);
 
-  const [value, setValue] = React.useState(0);
-  const [date, setDate] = React.useState(startDate);
-  const [photos, setPhotos] = useState({ photos: [] });
-  const [roverName] = useState(props.rover.name);
-
-  console.log('BasicTabs')
-  console.log(props)
-
+  const [value, setValue] = useState(0);
+  const [date, setDate] = useState(startDate);
+  const [photos, setPhotos] = useState([]);
+  // const [roverName, setRoverName] = useState(props.rover.name);
+  const roverName = props.rover.name
   useEffect(() => {
+    
     const fetchData = async (roverName, date) => {
       const result = await axios(
         API_URL +
@@ -89,7 +84,7 @@ export default function BasicTabs(props) {
           date.format("YYYY-MM-DD")
       );
 
-      setPhotos(result.data);
+      setPhotos(result.data.photos);
     };
     fetchData(roverName, date);
   }, [roverName, date]);
@@ -98,45 +93,32 @@ export default function BasicTabs(props) {
     setValue(newValue);
   };
 
-  const cameraTabs = [];
-  for (let i = 0; i < props.rover.cameras.length; i++) {
-    cameraTabs.push(
-      <Tab label={props.rover.cameras[i].name} {...a11yProps(i + 1)} />
-    );
-  }
+  const cameraTabs = props.rover.cameras.map((cam, index) => (
+    <Tab key={cam.name+cam.id} label={cam.name} {...a11yProps(index + 1)} />
+  ));
 
-  const tabPanel = [];
-  var ids = function (i) {
-    return [props.rover.cameras[i].name];
-  };
+ 
 
-  for (let i = 0; i < props.rover.cameras.length; i++) {
-    var data = photos;
+  let tabPanel = [];
+  if (photos.length > 0) {
+    
+    tabPanel = props.rover.cameras.map((cam, index) => {
+      var filteredArray = photos.filter((p) => p.camera.name === cam.name);
 
-    var filteredArray = data.photos.filter(function (itm) {
-      return ids(i).indexOf(itm.camera.name) > -1;
-    });
-
-    if (filteredArray.length > 0) {
-      tabPanel.push(
-        <TabPanel value={value} index={i + 1}>
-          <TitlebarImageList
-            photos={filteredArray}
-            camera={props.rover.cameras[i].name}
-          />
-        </TabPanel>
-      );
-    } else {
-      tabPanel.push(
-        <TabPanel value={value} index={i + 1}>
+      if (filteredArray.length > 0) {
+        return <TabPanel key={`${cam.name}-${index}`} value={value} index={index + 1}>
+          <TitlebarImageList onOpen={props.onOpen} photos={filteredArray} camera={cam.name} />
+        </TabPanel>;
+      } else {
+        return <TabPanel key={`${cam.name}-${index}`} value={value} index={index + 1}>
           No Images
-        </TabPanel>
-      );
-    }
+        </TabPanel>;
+      }
+    });
   }
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", height:'auto',}}>
       <Box
         sx={{
           borderBottom: 1,
@@ -145,6 +127,7 @@ export default function BasicTabs(props) {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
+          
         }}
       >
         <Tabs
@@ -154,7 +137,7 @@ export default function BasicTabs(props) {
           sx={{ flexWrap: "wrap" }}
         >
           <Tab label="All Cameras" {...a11yProps(0)} />
-          {cameraTabs}
+          {photos.length > 0 && cameraTabs}
         </Tabs>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -172,15 +155,15 @@ export default function BasicTabs(props) {
           </DemoContainer>
         </LocalizationProvider>
       </Box>
-      <TabPanel value={value} index={0}>
-        {photos.photos.length > 0 ? (
-          <TitlebarImageList photos={photos} />
+      <TabPanel key="all-cams" value={value} index={0}>
+        {photos.length > 0 ? (
+          <TitlebarImageList onOpenModal={props.onOpenModal} photos={photos} />
         ) : (
           "No Images"
         )}
       </TabPanel>
+      
       {tabPanel}
     </Box>
   );
 }
-
