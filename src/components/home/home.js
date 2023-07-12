@@ -14,10 +14,10 @@ const Home = (props) => {
       <CircularProgress sx={{ width: "500px", height: "auto" }} />
     </Box>
   ) : (
-    <Grid sx={{ height: "auto" }} container justifyContent="space-evenly" rowSpacing={4}>
+    <Grid id='home-grid' sx={{ height: "auto", padding: '24px' }} container justifyContent="space-between" rowSpacing={4}>
       {rovers.rovers.map((c) => (
         
-        <Grid key={c.id} item xs={5} columns={12}>
+        <Grid key={c.id} item xs={5.8}>
           
           <Item>
             <RoverCard rover={c} />

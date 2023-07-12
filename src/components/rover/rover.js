@@ -14,34 +14,29 @@ function Rover(props) {
   let currentRover = {};
 
   if (Object.keys(rovers).length > 0) {
-    
     currentRover = rovers.rovers.filter((x) => x.name === props.rover)[0];
   }
 
-  return (
+  return Object.keys(currentRover).length > 0 ? (
     <Container
       maxWidth="lg"
       sx={{ display: "flex", height: "auto", flexDirection: "column" }}
     >
-     
       <ImageList sx={{ width: "100%", height: "auto", borderRadius: "4px" }}>
         <ImageListItem key="Subheader" cols={2}>
           <ListSubheader component="div">
-            {Object.keys(currentRover).length > 0 ? (
-              <BasicTabs rover={currentRover} onOpenModal={props.onOpenModal}/>
-            ) : (
-              <Box
-                justifyContent="space-evenly"
-                sx={{ width: "100%", display: "flex" }}
-              >
-                <CircularProgress sx={{ width: "500px", height: "auto" }} />
-              </Box>
-            )}
+            <BasicTabs rover={currentRover} onOpenModal={props.onOpenModal} />
           </ListSubheader>
         </ImageListItem>
       </ImageList>
     </Container>
+  ) : (
+    <Box justifyContent="space-evenly" sx={{ width: "100%", display: "flex" }}>
+      <CircularProgress sx={{ width: "500px", height: "auto" }} />
+    </Box>
   );
 }
 
 export default Rover;
+
+

@@ -8,6 +8,10 @@ body {
     
 }
 
+header{
+    width: 100%;
+}
+
 #root{
     margin-bottom: 5vh;
 }
@@ -26,7 +30,7 @@ body {
 
 #mars-header{
     font-family: marsBold !important;
-    margin-top: 4vh;
+    margin-top: 5vh;
     font-size: 5rem;
 }
 
@@ -41,6 +45,15 @@ body {
     .tab-Panel-Class > div > p > ul{
         column-count: 1 !important;
     }
+
+    #home-grid{
+        display: block !important;
+    }
+
+    #home-grid > div, #home-grid > div > div > div{
+        max-width: 100% !important;
+    } 
+    
     
 }
 
