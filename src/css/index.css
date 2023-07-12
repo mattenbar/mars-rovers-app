@@ -50,6 +50,7 @@ header{
 @media (max-width: 800px) {
     .tab-Panel-Class > div > p > ul{
         column-count: 1 !important;
+        grid-template-columns: repeat(1, 1fr)!important;
     }
 
     #home-grid{
