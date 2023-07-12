@@ -1,6 +1,7 @@
 import Modal from "../UI/Modal";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import CloseIcon from '@mui/icons-material/Close';
 
 const ImageModal = (props) => {
   console.log("img modal", props.img);
@@ -14,7 +15,7 @@ const ImageModal = (props) => {
           id={props.img.id}
           name={props.img.camera.name}
         >
-          <button style={{float:'right', marginBottom:'10px'}} onClick={props.onClose}>X</button>
+          <CloseIcon id='close-btn'  sx={{float:'right', marginBottom:'10px'}} onClick={props.onClose} />
           <img
             id={props.img.id}
             orignalSrc={props.img.img_src}
