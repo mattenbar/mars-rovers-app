@@ -12,6 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment-hijri";
 import { API_KEY, API_URL } from "../../apiConstants";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
@@ -70,10 +71,10 @@ export default function BasicTabs(props) {
   const [value, setValue] = useState(0);
   const [date, setDate] = useState(startDate);
   const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
   // const [roverName, setRoverName] = useState(props.rover.name);
-  const roverName = props.rover.name
+  const roverName = props.rover.name;
   useEffect(() => {
-    
     const fetchData = async (roverName, date) => {
       const result = await axios(
         API_URL +
@@ -85,6 +86,7 @@ export default function BasicTabs(props) {
       );
 
       setPhotos(result.data.photos);
+      setLoading(false);
     };
     fetchData(roverName, date);
   }, [roverName, date]);
@@ -94,31 +96,50 @@ export default function BasicTabs(props) {
   };
 
   const cameraTabs = props.rover.cameras.map((cam, index) => (
-    <Tab key={cam.name+cam.id} label={cam.name} {...a11yProps(index + 1)} />
+    <Tab key={cam.name + cam.id} label={cam.name} {...a11yProps(index + 1)} />
   ));
-
- 
 
   let tabPanel = [];
   if (photos.length > 0) {
-    
     tabPanel = props.rover.cameras.map((cam, index) => {
       var filteredArray = photos.filter((p) => p.camera.name === cam.name);
 
       if (filteredArray.length > 0) {
-        return <TabPanel className={'tab-Panel-Class'} key={`${cam.name}-${index}`} value={value} index={index + 1}>
-          <TitlebarImageList className={'tab-Panel-Class'} onOpenModal={props.onOpenModal} photos={filteredArray} camera={cam.name} />
-        </TabPanel>;
+        return (
+          <TabPanel
+            className={"tab-Panel-Class"}
+            key={`${cam.name}-${index}`}
+            value={value}
+            index={index + 1}
+          >
+            <TitlebarImageList
+              className={"tab-Panel-Class"}
+              onOpenModal={props.onOpenModal}
+              photos={filteredArray}
+              camera={cam.name}
+            />
+          </TabPanel>
+        );
       } else {
-        return <TabPanel key={`${cam.name}-${index}`} value={value} index={index + 1}>
-          No Images
-        </TabPanel>;
+        return (
+          <TabPanel
+            key={`${cam.name}-${index}`}
+            value={value}
+            index={index + 1}
+          >
+            No Images
+          </TabPanel>
+        );
       }
     });
   }
 
-  return (
-    <Box sx={{ width: "100%", height:'auto',}}>
+  return loading ? (
+    <Box justifyContent="space-evenly" sx={{background: 'transparent !important', width: "100%", display: "flex" }}>
+      <CircularProgress sx={{ background: 'transparent !important', width: "500px", height: "auto" }} />
+    </Box> 
+  ) : (
+    <Box sx={{ background: 'white !important', width: "100%", height: "auto" }}>
       <Box
         sx={{
           borderBottom: 1,
@@ -127,7 +148,6 @@ export default function BasicTabs(props) {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
-          
         }}
       >
         <Tabs
@@ -137,7 +157,7 @@ export default function BasicTabs(props) {
           sx={{ flexWrap: "wrap" }}
         >
           <Tab label="All Cameras" {...a11yProps(0)} />
-          {photos.length > 0 && cameraTabs}
+          {cameraTabs}
         </Tabs>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -155,14 +175,25 @@ export default function BasicTabs(props) {
           </DemoContainer>
         </LocalizationProvider>
       </Box>
-      <TabPanel className={'tab-Panel-Class'} key="all-cams" value={value} index={0}>
-        {photos.length > 0 ? (
-          <TitlebarImageList className={'tab-Panel-Class'} onOpenModal={props.onOpenModal} photos={photos} />
-        ) : (
-          "No Images"
-        )}
-      </TabPanel>
       
+        <TabPanel
+          className={"tab-Panel-Class"}
+          key="all-cams"
+          value={value}
+          index={0}
+        >
+          {photos.length > 0 ? (
+            <TitlebarImageList
+              className={"tab-Panel-Class"}
+              onOpenModal={props.onOpenModal}
+              photos={photos}
+            />
+          ) : (
+            "No Images"
+          )}
+        </TabPanel>
+      
+
       {tabPanel}
     </Box>
   );

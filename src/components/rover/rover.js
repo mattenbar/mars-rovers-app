@@ -5,8 +5,6 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import BasicTabs from "./BasicTabs";
 import { useSelector } from "react-redux";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
 function Rover(props) {
   const rovers = { ...useSelector((state) => state.rovers) };
@@ -31,9 +29,7 @@ function Rover(props) {
       </ImageList>
     </Container>
   ) : (
-    <Box justifyContent="space-evenly" sx={{ width: "100%", display: "flex" }}>
-      <CircularProgress sx={{ width: "500px", height: "auto" }} />
-    </Box>
+    <></>
   );
 }
 

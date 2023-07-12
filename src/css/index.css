@@ -79,6 +79,12 @@ header{
     border-radius: 4px;
 }
 
+@media (max-width: 635px) {
+    .Nav > div{
+        flex-direction: column
+    }
+}
+
 /* .Nav > div.MuiBox-root.css-1kwdaty{
     justify-content: space-between;
     padding: 2%;
