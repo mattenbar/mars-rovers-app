@@ -3,10 +3,15 @@ body {
     background-image: url('../images/wallpaperflare.com_wallpaper.jpg') !important;
     color:black;
     background-repeat: no-repeat;
-    background-size: contain !important;
-    
+    background-size: cover !important;
+    background-attachment: fixed;
     
 }
+
+#root{
+    margin-bottom: 5vh;
+}
+
 
 
 @font-face {
@@ -28,6 +33,13 @@ body {
 @media (max-width: 800px) {
     #mars-header{
         font-size: 3rem;
+    }
+    
+}
+
+@media (max-width: 800px) {
+    .tab-Panel-Class > div > p > ul{
+        column-count: 1 !important;
     }
     
 }

@@ -155,9 +155,9 @@ export default function BasicTabs(props) {
           </DemoContainer>
         </LocalizationProvider>
       </Box>
-      <TabPanel key="all-cams" value={value} index={0}>
+      <TabPanel className={'tab-Panel-Class'} key="all-cams" value={value} index={0}>
         {photos.length > 0 ? (
-          <TitlebarImageList onOpenModal={props.onOpenModal} photos={photos} />
+          <TitlebarImageList className={'tab-Panel-Class'} onOpenModal={props.onOpenModal} photos={photos} />
         ) : (
           "No Images"
         )}
