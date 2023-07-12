@@ -106,8 +106,8 @@ export default function BasicTabs(props) {
       var filteredArray = photos.filter((p) => p.camera.name === cam.name);
 
       if (filteredArray.length > 0) {
-        return <TabPanel key={`${cam.name}-${index}`} value={value} index={index + 1}>
-          <TitlebarImageList onOpen={props.onOpen} photos={filteredArray} camera={cam.name} />
+        return <TabPanel className={'tab-Panel-Class'} key={`${cam.name}-${index}`} value={value} index={index + 1}>
+          <TitlebarImageList className={'tab-Panel-Class'} onOpenModal={props.onOpenModal} photos={filteredArray} camera={cam.name} />
         </TabPanel>;
       } else {
         return <TabPanel key={`${cam.name}-${index}`} value={value} index={index + 1}>
