@@ -20,7 +20,9 @@ header{
     margin-bottom: 5vh;
 }
 
-
+.MuiPagination-ul >li > button{
+    color:white;
+}
 
 @font-face {
     font-family: marsBold;
