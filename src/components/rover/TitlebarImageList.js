@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 export default function TitlebarImageList(props) {
 
-  const [date, setDate] = useState({})
   var data = props;
   if (data.photos.photos) {
     data = data.photos.photos;
@@ -14,9 +13,7 @@ export default function TitlebarImageList(props) {
   }
 
   const onTrigger = (event) => {
-    // Call the parent callback function
-    const img = props.photos.filter(photo=> photo.id == event.target.attributes['id'].value)
-    
+    const img = props.photos.filter(photo=> photo.id.toString() === event.target.attributes['id'].value.toString())
     props.onOpenModal(img);
   };
 

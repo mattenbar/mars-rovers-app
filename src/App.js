@@ -5,11 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Header from "./components/header/Header";
 import ImageModal from "./components/rover/ImageModal";
-
-//CSS
 import "./App.css";
-
-//components
 import Home from "./components/home/home";
 import Rover from "./components/rover/rover";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,7 +14,6 @@ import Container from "@mui/material/Container";
 const roverNames = ["Curiosity", "Spirit", "Opportunity", "Perseverance"];
 
 function handleOpenModal(data) {
-  // console.log("in open function", data.target);
   return this.setState({
     displayModal: true,
     img: data[0]
