@@ -1,15 +1,14 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { fetchRovers } from "./actions/fetchRovers";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import Header from "./components/header/Header";
 import ImageModal from "./components/rover/ImageModal";
-import "./App.css";
 import Home from "./components/home/home";
 import Rover from "./components/rover/rover";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
+import "./App.css";
 
 const roverNames = ["Curiosity", "Spirit", "Opportunity", "Perseverance"];
 
