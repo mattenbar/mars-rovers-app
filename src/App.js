@@ -12,10 +12,12 @@ import "./App.css";
 
 const roverNames = ["Curiosity", "Spirit", "Opportunity", "Perseverance"];
 
-function handleOpenModal(data) {
+function handleOpenModal(currentIimg, currentIndex, photos) {
   return this.setState({
     displayModal: true,
-    img: data[0]
+    img: currentIimg[0],
+    currentIndex: currentIndex,
+    photos: photos
   });
 }
 
@@ -24,7 +26,9 @@ class App extends React.Component {
     super();
     this.state = {
       displayModal: false,
-      img: "",
+      img: '',
+      currentIndex: 0,
+      photos: []
     };
     this.handleCloseEvent = this.handleCloseEvent.bind(this);
     this.handleOpenModal = handleOpenModal.bind(this);
@@ -58,7 +62,7 @@ class App extends React.Component {
         sx={{ display: "flex", height: "auto", flexWrap: "wrap" }}
       >
         {this.state.displayModal && (
-          <ImageModal img={this.state.img} onClose={this.handleCloseEvent} />
+          <ImageModal photos={this.state.photos} img={this.state.img} currentIndex={this.state.currentIndex} onClose={this.handleCloseEvent} />
         )}
         <CssBaseline />
         <Header roverNames={roverNames} />

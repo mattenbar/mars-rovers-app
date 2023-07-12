@@ -4,7 +4,6 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 export default function TitlebarImageList(props) {
-
   var data = props;
   if (data.photos.photos) {
     data = data.photos.photos;
@@ -13,13 +12,20 @@ export default function TitlebarImageList(props) {
   }
 
   const onTrigger = (event) => {
-    const img = props.photos.filter(photo=> photo.id.toString() === event.target.attributes['id'].value.toString())
-    props.onOpenModal(img);
+    const currentImg = props.photos.filter(
+      (photo) =>
+        photo.id.toString() === event.target.attributes["id"].value.toString()
+    );
+    const findIndexHelper = (element) =>
+      element.id.toString() === event.target.attributes["id"].value.toString();
+    const currentIndex = props.photos.findIndex(findIndexHelper)
+    const photos = props.photos;
+    props.onOpenModal(currentImg, currentIndex, photos);
   };
 
   return (
     <ImageList
-      variant="masonry"
+      
       cols={2}
       gap={8}
       sx={{ width: "100%", height: "100%" }}
