@@ -10,15 +10,17 @@
   
   .modal {
     position: fixed;
-    top: 20vh;
+    max-width: 80vh;
+    height: auto;
+    top: 10vh;
     left: 5%;
-    width: 90%;
+    width: 100%;
     background-color: white;
     padding: 1rem;
     border-radius: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     z-index: 30;
-    animation: slide-down 300ms ease-out forwards;
+    animation: slide-down 400ms ease-out forwards;
   }
   
   @media (min-width: 768px) {
@@ -31,7 +33,7 @@
   @keyframes slide-down {
     from {
       opacity: 0;
-      transform: translateY(-3rem);
+      transform: translateY(-4rem);
     }
     to {
       opacity: 1;

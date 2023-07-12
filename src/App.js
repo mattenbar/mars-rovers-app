@@ -18,10 +18,10 @@ import Container from "@mui/material/Container";
 const roverNames = ["Curiosity", "Spirit", "Opportunity", "Perseverance"];
 
 function handleOpenModal(data) {
-  console.log("in open function", data.target['__reactProps$qm4km4ggqg'].orignalSrc);
+  // console.log("in open function", data.target);
   return this.setState({
     displayModal: true,
-    imgSrc: data.target['__reactProps$qm4km4ggqg'].orignalSrc
+    img: data[0]
   });
 }
 
@@ -30,7 +30,7 @@ class App extends React.Component {
     super();
     this.state = {
       displayModal: false,
-      imgSrc: "",
+      img: "",
     };
     this.handleCloseEvent = this.handleCloseEvent.bind(this);
     this.handleOpenModal = handleOpenModal.bind(this);
@@ -64,7 +64,7 @@ class App extends React.Component {
         sx={{ display: "flex", height: "auto", flexWrap: "wrap" }}
       >
         {this.state.displayModal && (
-          <ImageModal imgSrc={this.state.imgSrc} onClose={this.handleCloseEvent} />
+          <ImageModal img={this.state.img} onClose={this.handleCloseEvent} />
         )}
         <CssBaseline />
         <Header roverNames={roverNames} />
