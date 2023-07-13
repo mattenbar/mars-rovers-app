@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 const ImageModal = (props) => {
   const [currentImg, setCurrentImg] = useState(props.img);
   const [currentIndex, setCurrentIndex] = useState(props.currentIndex);
-  console.log("img modal props", props);
+
 
   const handleChange = (event, value) => {
     setCurrentIndex(value - 1);
@@ -28,7 +28,7 @@ const ImageModal = (props) => {
       >
         <img
           id={currentImg.id}
-          orignalSrc={currentImg.img_src}
+          
           src={`${currentImg.img_src}?w=248&fit=crop&auto=format`}
           srcSet={`${currentImg.img_src}?w=248&fit=crop&auto=format&dpr=2 2x`}
           alt="img"

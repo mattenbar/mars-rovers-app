@@ -9,8 +9,7 @@ export function fetchRovers(){
     fetch(API_URL  + API_KEY)
       .then(res => res.json())
       .then(resObj => {
-        // console.log('in fetch rovers')
-        // console.log(resObj.rovers)
+
         dispatch({type: FETCH_ROVERS, payload: resObj.rovers})
       })
     }

@@ -39,7 +39,7 @@ export default function TitlebarImageList(props) {
         >
           <img
             id={item.id}
-            orignalSrc={item.img_src}
+          
             src={`${item.img_src}?w=248&fit=crop&auto=format`}
             srcSet={`${item.img_src}?w=248&fit=crop&auto=format&dpr=2 2x`}
             alt="img"

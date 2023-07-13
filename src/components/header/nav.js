@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 
 export default function Nav(props) {
-//   console.log('Nav.js')
-// console.log(props)
 
   const links =  props.roverNames.map((c) => (
       <Link

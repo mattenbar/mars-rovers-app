@@ -29,7 +29,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -72,7 +72,6 @@ export default function BasicTabs(props) {
   const [date, setDate] = useState(startDate);
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [roverName, setRoverName] = useState(props.rover.name);
   const roverName = props.rover.name;
   useEffect(() => {
     const fetchData = async (roverName, date) => {
@@ -135,11 +134,24 @@ export default function BasicTabs(props) {
   }
 
   return loading ? (
-    <Box justifyContent="space-evenly" sx={{background: 'transparent !important', width: "100%", display: "flex" }}>
-      <CircularProgress sx={{ background: 'transparent !important', width: "500px", height: "auto" }} />
-    </Box> 
+    <Box
+      justifyContent="space-evenly"
+      sx={{
+        background: "transparent !important",
+        width: "100%",
+        display: "flex",
+      }}
+    >
+      <CircularProgress
+        sx={{
+          background: "transparent !important",
+          width: "500px",
+          height: "auto",
+        }}
+      />
+    </Box>
   ) : (
-    <Box sx={{ background: 'white !important', width: "100%", height: "auto" }}>
+    <Box sx={{ background: "white !important", width: "100%", height: "auto" }}>
       <Box
         sx={{
           borderBottom: 1,
@@ -175,24 +187,23 @@ export default function BasicTabs(props) {
           </DemoContainer>
         </LocalizationProvider>
       </Box>
-      
-        <TabPanel
-          className={"tab-Panel-Class"}
-          key="all-cams"
-          value={value}
-          index={0}
-        >
-          {photos.length > 0 ? (
-            <TitlebarImageList
-              className={"tab-Panel-Class"}
-              onOpenModal={props.onOpenModal}
-              photos={photos}
-            />
-          ) : (
-            "No Images"
-          )}
-        </TabPanel>
-      
+
+      <TabPanel
+        className={"tab-Panel-Class"}
+        key="all-cams"
+        value={value}
+        index={0}
+      >
+        {photos.length > 0 ? (
+          <TitlebarImageList
+            className={"tab-Panel-Class"}
+            onOpenModal={props.onOpenModal}
+            photos={photos}
+          />
+        ) : (
+          "No Images"
+        )}
+      </TabPanel>
 
       {tabPanel}
     </Box>
