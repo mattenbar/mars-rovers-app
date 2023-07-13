@@ -22,7 +22,7 @@ function Rover(props) {
     >
       <ImageList sx={{ width: "100%", height: "auto", borderRadius: "4px" }}>
         <ImageListItem key="Subheader" cols={2}>
-          <ListSubheader component="div">
+          <ListSubheader component="div" sx={{padding:0}}>
             <BasicTabs rover={currentRover} onOpenModal={props.onOpenModal} />
           </ListSubheader>
         </ImageListItem>
