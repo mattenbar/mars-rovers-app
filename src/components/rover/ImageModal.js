@@ -43,12 +43,15 @@ const ImageModal = (props) => {
 
       <ImageListItemBar
       sx={{
-        position: "inherit !important"}}
+        position: "inherit !important",
+        backgroundColor: 'black'
+      }}
         title={
           <Stack
             sx={{
               padding: "5px",
               alignItems: "center",
+              backgroundColor: 'black'
             }}
             spacing={2}
           >
@@ -56,6 +59,7 @@ const ImageModal = (props) => {
               defaultPage={currentIndex + 1}
               onChange={handleChange}
               count={props.photos.length}
+              sx={{backgroundColor: 'black'}}
             />
           </Stack>
         }

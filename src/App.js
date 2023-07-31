@@ -1,70 +1,95 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-//import { Switch, Route, withRouter } from "react-router-dom";
-// import { fetchRovers } from "./actions/fetchRovers";
-// import { connect } from "react-redux";
-// import Header from "./components/header/Header";
-// import ImageModal from "./components/rover/ImageModal";
-
+import ImageModal from "./components/rover/ImageModal";
 import Home from "./components/home/home";
-// import Rover from "./components/rover/rover";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import Container from "@mui/material/Container";
-
 import RootLayout from "./pages/Root";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoversData } from "./store/rover-actions";
-import Rover from './components/rover/rover'
+import Rover from "./components/rover/rover";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { path: "/", element: <Home/> },
-      { path: "/curiosity", element: <Rover /> },
-      { path: "/spirit", element: <></> },
-      { path: "/opportunity", element: <></> },
-      { path: "/perseverance", element: <></> },
-    ],
-  },
-]);
-
-
+const initialState = {
+  displayModal: false,
+  img: "",
+  currentIndex: 0,
+  photos: [],
+};
 
 export default function App() {
-  const
+  const dispatch = useDispatch();
+  const [modal, setModal] = useState(initialState);
 
-  handleCloseEvent = () => {
-    return this.setState({
-      displayModal: false,
+  const handleOpenModal = (currentIimg, currentIndex, photos) => {
+    console.log(currentIimg, currentIndex, photos);
+    return setModal({
+      displayModal: true,
+      img: currentIimg[0],
+      currentIndex: currentIndex,
+      photos: photos,
     });
   };
 
-  const dispatch = useDispatch();
-  
-  useEffect(()=>{
-    dispatch(fetchRoversData())
-  },[dispatch])
+  const handleCloseEvent = () => {
+    return setModal(initialState);
+  };
+
+  useEffect(() => {
+    dispatch(fetchRoversData());
+  }, [dispatch]);
 
   const rovers = useSelector((state) => state.rovers);
 
-  return (
-    <>
-      {console.log(rovers)}
-      <RouterProvider router={router}></RouterProvider>
-    </>
-  );
-}
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout closeModal={handleCloseEvent} modal={modal} />,
+      children: [
+        { path: "/", element: <Home /> },
+        {
+          path: "/curiosity",
+          element: (
+            <Rover
+              roverName="Curiosity"
+              rovers={rovers}
+              onOpenModal={handleOpenModal.bind(this)}
+            />
+          ),
+        },
+        {
+          path: "/spirit",
+          element: (
+            <Rover
+              roverName="Spirit"
+              rovers={rovers}
+              onOpenModal={handleOpenModal.bind(this)}
+            />
+          ),
+        },
+        {
+          path: "/opportunity",
+          element: (
+            <Rover
+              roverName="Opportunity"
+              rovers={rovers}
+              onOpenModal={handleOpenModal.bind(this)}
+            />
+          ),
+        },
+        {
+          path: "/perseverance",
+          element: (
+            <Rover
+              roverName="Perseverance"
+              rovers={rovers}
+              onOpenModal={handleOpenModal.bind(this)}
+            />
+          ),
+        },
+      ],
+    },
+  ]);
 
-// function handleOpenModal(currentIimg, currentIndex, photos) {
-//   return this.setState({
-//     displayModal: true,
-//     img: currentIimg[0],
-//     currentIndex: currentIndex,
-//     photos: photos
-//   });
-// }
+  return <RouterProvider router={router}></RouterProvider>;
+}
 
 // class App extends React.Component {
 //   constructor() {
@@ -78,8 +103,6 @@ export default function App() {
 //     this.handleCloseEvent = this.handleCloseEvent.bind(this);
 //     this.handleOpenModal = handleOpenModal.bind(this);
 //   }
-
-
 
 //   render() {
 //     // const routes = roverNames.map((c) => (
