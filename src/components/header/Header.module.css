@@ -1,0 +1,11 @@
+.main-header {
+  max-width: 80vw;
+  margin: auto;
+}
+
+.main-header > h1{
+    color: red;
+    font-family: marsBold;
+    margin-top: 3vh;
+    font-size: 3rem;
+}

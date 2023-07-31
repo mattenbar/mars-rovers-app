@@ -13,7 +13,7 @@ import curiosity from "../../images/mars.nasa.jpg";
 import opportunity from "../../images/opportunity-rover.jpg";
 import perseverance from "../../images/perseverance-rover.jpeg";
 import spirit from "../../images/spirit-rover.jpeg";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -84,7 +84,7 @@ export default function RoverCard(props) {
         <Typography variant="body2" fontSize="16px" color="text.main">
           Photos: {props.rover.total_photos}
         </Typography>
-        <Link href={"/" + props.rover.name} fontSize="16px" underline="hover">
+        <Link to={"/" + props.rover.name} fontSize="16px" underline="hover">
           {"View Images"}
         </Link>
       </CardContent>

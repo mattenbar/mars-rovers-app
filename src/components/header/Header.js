@@ -1,19 +1,16 @@
 import Typography from "@mui/material/Typography";
 import Nav from "./nav";
+import classes from "./Header.module.css";
 
 const Header = (props) => {
   return (
-    <header>
+    <header className={classes["main-header"]}>
       <Typography
-        sx={{ justifyContent: "center", display: "flex" }}
-        id="mars-header"
         variant="h1"
-        color="red"
       >
         MARS ROVERS
       </Typography>
-
-      <Nav roverNames={props.roverNames} />
+      <Nav />
     </header>
   );
 };

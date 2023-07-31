@@ -1,121 +1,90 @@
 body {
-    background-color: black !important;
-    background-image: url('../images/wallpaperflare.com_wallpaper.jpg') !important;
-    color:black;
-    background-repeat: no-repeat;
-    background-size: cover !important;
-    background-attachment: fixed;
-    
+  background-color: black !important;
+  background-image: url("../images/wallpaperflare.com_wallpaper.jpg") !important;
+  color: black;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-attachment: fixed;
 }
 
-#close-btn:hover{
-    color:red;
+#close-btn:hover {
+  color: red;
+}
+
+#root {
+  margin-bottom: 5vh;
+  max-width: 80vw;
+  margin: auto;
 }
 
 header{
-    width: 100%;
+    padding-bottom: 5vh;
 }
 
-#root{
-    margin-bottom: 5vh;
-}
-
-.MuiPagination-ul >li > button{
-    color:white;
+.MuiPagination-ul > li > button {
+  color: white;
 }
 
 @font-face {
-    font-family: marsBold;
-    src: url("../fonts/Mars/Mars-Bold.ttf") format("truetype");
+  font-family: marsBold;
+  src: url("../fonts/Mars/Mars-Bold.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: marsThin;
-    src: url("../fonts/Mars/Mars-Thin.ttf") format("truetype");
+  font-family: marsThin;
+  src: url("../fonts/Mars/Mars-Thin.ttf") format("truetype");
 }
 
-#mars-header{
-    font-family: marsBold !important;
-    margin-top: 5vh;
-    font-size: 5rem;
+.mars-bold {
+  font-family: marsBold;
 }
 
-@media (max-width: 800px) {
-    #mars-header{
-        font-size: 3rem;
-    }
-    
+.mars-thin {
+  font-family: marsThin;
 }
 
-@media (max-width: 800px) {
-    .tab-Panel-Class > div > p > ul{
-        column-count: 1 !important;
-        grid-template-columns: repeat(1, 1fr)!important;
-    }
+/* @media (max-width: 800px) {
+  .tab-Panel-Class > div > p > ul {
+    column-count: 1 !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
 
-    #home-grid{
-        display: block !important;
-    }
+  #home-grid {
+    display: block !important;
+  }
 
-    #home-grid > div, #home-grid > div > div > div{
-        max-width: 100% !important;
-    } 
-    
-    
-}
-
-.MuiCardHeader-title{
-    font-family: marsBold !important;
-}
-
-.Nav > *{
-    background-color: white!important;
-    border-radius: 4px;
-}
-
-.Nav{
-    width: 100% ;
-    padding: 24px;
-    border-radius: 4px;
-}
-
-@media (max-width: 635px) {
-    .Nav > div{
-        flex-direction: column
-    }
-}
-
-/* .Nav > div.MuiBox-root.css-1kwdaty{
-    justify-content: space-between;
-    padding: 2%;
+  #home-grid > div,
+  #home-grid > div > div > div {
+    max-width: 100% !important;
+  }
 } */
 
-.MuiTabs-flexContainer.css-heg063-MuiTabs-flexContainer{
-    flex-wrap: wrap;
+.MuiCardHeader-title {
+  font-family: marsBold !important;
 }
 
-.MuiStack-root.css-1xhypcz-MuiStack-root{
-    overflow: visible;
+.MuiTabs-flexContainer.css-heg063-MuiTabs-flexContainer {
+  flex-wrap: wrap;
 }
 
-span.MuiTabs-indicator{
-    display: none !important;
+.MuiStack-root.css-1xhypcz-MuiStack-root {
+  overflow: visible;
 }
 
-button.Mui-selected{
-    text-decoration: underline;
-    font-weight: bold;
+span.MuiTabs-indicator {
+  display: none !important;
 }
 
-div.MuiBox-root.css-18m5ng9{
-    margin: 0;
-    padding: 16px;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 2;
+button.Mui-selected {
+  text-decoration: underline;
+  font-weight: bold;
 }
-header{
-    margin: auto;
-    max-width: 1200px;
+
+div.MuiBox-root.css-18m5ng9 {
+  margin: 0;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
 }

@@ -1,51 +1,37 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
+import { NavLink } from "react-router-dom";
+import classes from "./nav.module.css";
 
 export default function Nav(props) {
+  const roverNames = ["Curiosity", "Spirit", "Opportunity", "Perseverance"];
 
-  const links =  props.roverNames.map((c) => (
-      <Link
-        key={c}
-        sx={{ padding: "1%" }}
+  const links = roverNames.map((c) => (
+    <li key={c}>
+      <NavLink
+        className={({ isActive }) => (isActive ? classes.active : undefined)}
         fontFamily={"marsBold"}
-        color="text.main"
-        href={"/" + c}
-        fontSize="16px"
-        underline="hover"
+        to={"/" + c}
       >
         {c}
-      </Link>
-    ));
-  ;
+      </NavLink>
+    </li>
+  ));
 
   return (
-    <div className="Nav">
-      <Box
-        maxWidth="lg"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-          height: "2",
-        }}
-      >
-        <Link
-          key="home"
-          fontFamily={"marsBold"}
-          color="text.main"
-          href={"/"}
-          fontSize="16px"
-          underline="hover"
-          sk={{ margin: "20px", height: "15px" }}
-        >
-          {"Home"}
-        </Link>
+    <nav key="nav">
+      <ul className={classes.list}>
+        <li key="home">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? classes.active : undefined
+            }
+            to={"/"}
+          >
+            Home
+          </NavLink>
+        </li>
         {links}
-      </Box>
-    </div>
+      </ul>
+    </nav>
   );
 }
-

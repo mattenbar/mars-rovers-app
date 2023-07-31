@@ -1,0 +1,26 @@
+.list a:hover,
+.list a.active {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.list a{
+    font-family: "marsBold";
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+nav{
+    background-color: whitesmoke;
+}
