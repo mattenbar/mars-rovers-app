@@ -29,7 +29,7 @@ const Home = () => {
           }}
           xs={6}
         >
-          <Item sx={{width:'98%', marginBottom: '5vh'}}>
+          <Item sx={{width:'98%', marginBottom: '5vh', display:'flex', justifyContent: 'center'}}>
             <RoverCard  rover={c} />
           </Item>
         </Grid>

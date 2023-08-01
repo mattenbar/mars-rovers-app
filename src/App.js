@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ImageModal from "./components/rover/ImageModal";
 import Home from "./components/home/home";
 import RootLayout from "./pages/Root";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +48,7 @@ export default function App() {
           element: (
             <Rover
               roverName="Curiosity"
-              rovers={rovers}
+              
               onOpenModal={handleOpenModal.bind(this)}
             />
           ),
@@ -59,7 +58,7 @@ export default function App() {
           element: (
             <Rover
               roverName="Spirit"
-              rovers={rovers}
+              
               onOpenModal={handleOpenModal.bind(this)}
             />
           ),
@@ -69,7 +68,7 @@ export default function App() {
           element: (
             <Rover
               roverName="Opportunity"
-              rovers={rovers}
+              
               onOpenModal={handleOpenModal.bind(this)}
             />
           ),
@@ -79,7 +78,7 @@ export default function App() {
           element: (
             <Rover
               roverName="Perseverance"
-              rovers={rovers}
+          
               onOpenModal={handleOpenModal.bind(this)}
             />
           ),

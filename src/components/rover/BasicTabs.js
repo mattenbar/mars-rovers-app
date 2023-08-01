@@ -11,10 +11,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment-hijri";
-import { API_KEY, API_URL } from "../../apiConstants";
 import CircularProgress from "@mui/material/CircularProgress";
-
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPhotosData } from "../../store/photos-actions";
+import { min } from "date-fns";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -29,7 +29,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography component={'span'}>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -49,46 +49,47 @@ function a11yProps(index) {
   };
 }
 
-function checkDate(maxDate = "2020-02-20") {
-  var today = moment().format("YYYY-MM-DD");
+function checkDate(maxDate, minDate, date) {
   var defaultDate = "";
+  
+  if(!!date){
+    today = moment(date['$d']).format("YYYY-MM-DD") 
+  }else{
+    var today = moment().format("YYYY-MM-DD");
+  }
+
   if (moment(today).isAfter(moment(maxDate).format("YYYY-MM-DD"))) {
     defaultDate = moment(maxDate).format("YYYY-MM-DD");
+  } else if (moment(today).isBefore(moment(minDate).format("YYYY-MM-DD"))) {
+    defaultDate = moment(minDate).format("YYYY-MM-DD");
   } else {
     defaultDate = today;
   }
 
-  return dayjs(defaultDate);
+  
+
+  defaultDate = dayjs(defaultDate);
+  return defaultDate;
 }
 
 export default function BasicTabs(props) {
+  const dispatch = useDispatch();
+  const photos = useSelector((state) => state.photos).photos;
+  const roverName = props.rover.name;
   const maxDate = props.rover["max_date"];
   const minDate = props.rover["landing_date"];
 
-  var startDate = checkDate(maxDate);
-  startDate = dayjs(startDate);
-
-  const [value, setValue] = useState(0);
+  let startDate = dayjs(checkDate(maxDate, minDate));
   const [date, setDate] = useState(startDate);
-  const [photos, setPhotos] = useState([]);
+  const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(true);
-  const roverName = props.rover.name;
-  useEffect(() => {
-    const fetchData = async (roverName, date) => {
-      const result = await axios(
-        API_URL +
-          roverName +
-          "/photos" +
-          API_KEY +
-          "&earth_date=" +
-          date.format("YYYY-MM-DD")
-      );
 
-      setPhotos(result.data.photos);
-      setLoading(false);
-    };
-    fetchData(roverName, date);
-  }, [roverName, date]);
+  useEffect(() => {
+    startDate = dayjs(checkDate(maxDate, minDate, date));
+    dispatch(fetchPhotosData(roverName, startDate));
+    setLoading(false);
+    setDate(startDate);
+  }, [dispatch, loading, props]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
