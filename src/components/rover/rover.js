@@ -16,7 +16,7 @@ function Rover(props) {
     <>
     
      <Container
-      maxWidth="lg"
+      maxWidth="80vw"
       sx={{ display: "flex", height: "auto", flexDirection: "column", padding: '0 !important' }}
     >
       <ImageList sx={{ width: "100%", height: "auto", borderRadius: "4px" }}>
