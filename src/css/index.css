@@ -13,12 +13,12 @@ body {
 
 #root {
   margin-bottom: 5vh;
-  max-width: 80vw;
+  max-width: 75vw;
   margin: auto;
 }
 
 header{
-    padding-bottom: 5vh;
+    padding-bottom: 1vh;
 }
 
 .MuiPagination-ul > li > button {
