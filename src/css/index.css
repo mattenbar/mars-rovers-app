@@ -95,7 +95,7 @@ button.MuiTab-root[aria-selected = 'true']{
   color: rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
 li.MuiImageListItem-root{
   grid-column-end: span 2 !important;
 }
