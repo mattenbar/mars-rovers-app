@@ -13,7 +13,7 @@ body {
 
 #root {
   margin-bottom: 5vh;
-  max-width: 1200px;
+  max-width: 80vw;
   margin: auto;
 }
 
@@ -43,7 +43,7 @@ header{
   font-family: marsThin;
 }
 
-/* @media (max-width: 800px) {
+@media (max-width: 800px) {
   .tab-Panel-Class > div > p > ul {
     column-count: 1 !important;
     grid-template-columns: repeat(1, 1fr) !important;
@@ -56,8 +56,9 @@ header{
   #home-grid > div,
   #home-grid > div > div > div {
     max-width: 100% !important;
+    width: 80vw
   }
-} */
+}
 
 .MuiCardHeader-title {
   font-family: marsBold !important;
@@ -87,4 +88,15 @@ div.MuiBox-root.css-18m5ng9 {
   top: 0;
   background-color: white;
   z-index: 2;
+}
+
+button.MuiTab-root[aria-selected = 'true']{
+  border-bottom: 2px solid red !important;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 800px) {
+li.MuiImageListItem-root{
+  grid-column-end: span 2 !important;
+}
 }

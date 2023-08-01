@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -14,7 +13,6 @@ import moment from "moment-hijri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotosData } from "../../store/photos-actions";
-import { min } from "date-fns";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,25 +34,12 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 function checkDate(maxDate, minDate, date) {
   var defaultDate = "";
-  
-  if(!!date){
-    today = moment(date['$d']).format("YYYY-MM-DD") 
-  }else{
+
+  if (!!date) {
+    today = moment(date["$d"]).format("YYYY-MM-DD");
+  } else {
     var today = moment().format("YYYY-MM-DD");
   }
 
@@ -65,8 +50,6 @@ function checkDate(maxDate, minDate, date) {
   } else {
     defaultDate = today;
   }
-
-  
 
   defaultDate = dayjs(defaultDate);
   return defaultDate;
@@ -96,7 +79,7 @@ export default function BasicTabs(props) {
   };
 
   const cameraTabs = props.rover.cameras.map((cam, index) => (
-    <Tab key={cam.name + cam.id} label={cam.name} {...a11yProps(index + 1)} />
+    <Tab sx={{ textDecoration: "none !important" }} key={cam.name + cam.id} label={cam.name} />
   ));
 
   let tabPanel = [];
@@ -167,9 +150,8 @@ export default function BasicTabs(props) {
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
-          sx={{ flexWrap: "wrap" }}
         >
-          <Tab label="All Cameras" {...a11yProps(0)} />
+          <Tab label="All Cameras" sx={{ textDecoration: "none !important" }} />
           {cameraTabs}
         </Tabs>
 

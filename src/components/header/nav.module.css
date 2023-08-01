@@ -1,7 +1,8 @@
 .list a:hover,
 .list a.active {
-  text-decoration: underline;
   text-decoration-color: black;
+  border-bottom: 2px solid red;
+  padding-bottom: 2px
 }
 
 .list a{
@@ -19,6 +20,7 @@
     justify-content: space-around;
     padding: 1rem;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 nav{
