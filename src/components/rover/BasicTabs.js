@@ -74,7 +74,7 @@ export default function BasicTabs(props) {
     console.log("date in useEffect", date)
     const newDate = dayjs(checkDate(maxDate, minDate, date));
     dispatch(fetchPhotosData(roverName, newDate));
-  }, [props, date,dispatch, maxDate, minDate,  roverName]);
+  }, [ date,dispatch, maxDate, minDate,  roverName]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

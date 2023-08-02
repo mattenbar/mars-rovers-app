@@ -21,7 +21,7 @@ header{
     padding-bottom: 1vh;
 }
 
-.MuiPagination-ul > li > button {
+.MuiPagination-ul > li > * {
   color: white;
 }
 
