@@ -27,10 +27,12 @@ const Home = () => {
             display: "flex",
             width: '90%',
             justifyContent: "center",
+            padding: '0 !important'
           }}
           xs={6}
+          item={true}
         >
-          <Item sx={{width:'98%', marginBottom: '5vh', display:'flex', justifyContent: 'center'}}>
+          <Item sx={{width:'98%', marginBottom: '5vh', display:'flex', justifyContent: 'center', }}>
             <RoverCard  rover={c} />
           </Item>
         </Grid>
