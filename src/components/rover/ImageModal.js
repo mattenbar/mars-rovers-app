@@ -18,13 +18,15 @@ const ImageModal = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-      <CloseIcon id="close-btn" sx={{}} onClick={props.onClose} />
+      <CloseIcon sx={{alignSelf: 'end'}} id="close-btn"  onClick={props.onClose} />
 
       <ImageListItem
         key={`${currentImg.camera.name}_${props.img.id}`}
         id={currentImg.id}
         name={currentImg.camera.name}
-        sx={{ width: "auto" }}
+        sx={{ width: "auto", maxHeight: 'fit-content',
+        maxWidth: 'fit-content',
+        alignSelf: 'center' }}
       >
         <img
           id={currentImg.id}

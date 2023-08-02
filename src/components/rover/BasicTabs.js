@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -37,10 +37,11 @@ function TabPanel(props) {
 function checkDate(maxDate, minDate, date) {
   var defaultDate = "";
 
+  var today = ''
   if (!!date) {
     today = moment(date["$d"]).format("YYYY-MM-DD");
   } else {
-    var today = moment().format("YYYY-MM-DD");
+    today = moment().format("YYYY-MM-DD");
   }
 
   if (moment(today).isAfter(moment(maxDate).format("YYYY-MM-DD"))) {
@@ -58,25 +59,28 @@ function checkDate(maxDate, minDate, date) {
 export default function BasicTabs(props) {
   const dispatch = useDispatch();
   const photos = useSelector((state) => state.photos).photos;
+
   const roverName = props.rover.name;
   const maxDate = props.rover["max_date"];
   const minDate = props.rover["landing_date"];
-
-  let startDate = dayjs(checkDate(maxDate, minDate));
-  const [date, setDate] = useState(startDate);
+  const startDate = useRef(dayjs(checkDate(maxDate, minDate))) 
+  const [date, setDate] = useState(startDate.current);
   const [value, setValue] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const loading = useRef(true);
+ 
+;
 
   useEffect(() => {
-    startDate = dayjs(checkDate(maxDate, minDate, date));
-    dispatch(fetchPhotosData(roverName, startDate));
-    setLoading(false);
-    setDate(startDate);
-  }, [dispatch, loading, props]);
+    console.log("date in useEffect", date)
+    const newDate = dayjs(checkDate(maxDate, minDate, date));
+    dispatch(fetchPhotosData(roverName, newDate));
+  }, [props, date,dispatch, maxDate, minDate,  roverName]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  
 
   const cameraTabs = props.rover.cameras.map((cam, index) => (
     <Tab sx={{ textDecoration: "none !important" }} key={cam.name + cam.id} label={cam.name} />
@@ -84,6 +88,7 @@ export default function BasicTabs(props) {
 
   let tabPanel = [];
   if (photos.length > 0) {
+    loading.current = false
     tabPanel = props.rover.cameras.map((cam, index) => {
       var filteredArray = photos.filter((p) => p.camera.name === cam.name);
 
@@ -117,7 +122,7 @@ export default function BasicTabs(props) {
     });
   }
 
-  return loading ? (
+  return loading.current ? (
     <Box
       justifyContent="space-evenly"
       sx={{
@@ -159,9 +164,11 @@ export default function BasicTabs(props) {
           <DemoContainer components={["DateField", "DateField"]}>
             <DatePicker
               label="Date"
-              value={date}
+              value={checkDate(maxDate, minDate,date)}
               onChange={(newValue) => {
-                setDate(newValue);
+                loading.current= true
+                const newDate = checkDate(maxDate, minDate, newValue)
+                setDate(newDate);
               }}
               maxDate={dayjs(maxDate)}
               minDate={dayjs(minDate)}
