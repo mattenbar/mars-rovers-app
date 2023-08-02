@@ -47,9 +47,10 @@ const ImageModal = (props, onKeyPress) => {
         name={currentImg.camera.name}
         sx={{
           width: "auto",
-          maxHeight: "fit-content",
-          maxWidth: "fit-content",
-          alignSelf: "center",
+          height: '100% !important',
+          maxHeight: "88% ",
+          maxWidth: "fit-content !important ",
+          alignSelf: "center !important ",
         }}
       >
         <img

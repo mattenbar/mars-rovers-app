@@ -22,6 +22,7 @@ const Home = () => {
     >
       {rovers.rovers.map((c) => (
         <Grid
+        key={c.name}
           sx={{
             display: "flex",
             width: '90%',

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/home/home";
 import RootLayout from "./pages/Root";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { fetchRoversData } from "./store/rover-actions";
 import Rover from "./components/rover/rover";
 
@@ -18,7 +18,7 @@ export default function App() {
   const [modal, setModal] = useState(initialState);
 
   const handleOpenModal = (currentIimg, currentIndex, photos) => {
-    console.log(currentIimg, currentIndex, photos);
+    
     return setModal({
       displayModal: true,
       img: currentIimg[0],
@@ -35,7 +35,7 @@ export default function App() {
     dispatch(fetchRoversData());
   }, [dispatch]);
 
-  const rovers = useSelector((state) => state.rovers);
+
 
   const router = createBrowserRouter([
     {
