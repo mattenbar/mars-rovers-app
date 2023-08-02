@@ -11,7 +11,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment-hijri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPhotosData } from "../../store/photos-actions";
+import { fetchPhotosData, clearPhotosData } from "../../store/photos-actions";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,7 +58,6 @@ function checkDate(maxDate, minDate, date) {
 export default function BasicTabs(props) {
   const dispatch = useDispatch();
   const photos = useSelector((state) => state.photos).photos;
-
   const roverName = props.rover.name;
   const maxDate = props.rover["max_date"];
   const minDate = props.rover["landing_date"];
@@ -68,6 +67,9 @@ export default function BasicTabs(props) {
   const loading = useRef(true);
 
   useEffect(() => {
+    dispatch(clearPhotosData())
+    loading.current = true
+    
     const newDate = dayjs(checkDate(maxDate, minDate, date));
     dispatch(fetchPhotosData(roverName, newDate));
   }, [date, dispatch, maxDate, minDate, roverName]);

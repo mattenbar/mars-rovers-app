@@ -8,6 +8,9 @@ const photosSlice = createSlice({
    
       state.photos = action.payload;
     },
+    clearPhotos(state){
+        state.photos = []
+    }
   },
 });
 

@@ -29,3 +29,13 @@ export const fetchPhotosData = (roverName,date) => {
     } catch (error) {}
   };
 };
+
+
+
+export const clearPhotosData = () => {
+    //console.log('fetch start',roverName,date)
+  return (dispatch) => {
+    
+    dispatch(photosActions.fetchPhotos([]));
+  };
+};
