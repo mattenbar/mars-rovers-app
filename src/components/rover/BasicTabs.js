@@ -69,7 +69,7 @@ export default function BasicTabs(props) {
   useEffect(() => {
     dispatch(clearPhotosData())
     loading.current = true
-    
+    setValue(0)
     const newDate = dayjs(checkDate(maxDate, minDate, date));
     dispatch(fetchPhotosData(roverName, newDate));
   }, [date, dispatch, maxDate, minDate, roverName]);
