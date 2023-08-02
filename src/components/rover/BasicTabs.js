@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TitlebarImageList from "./TitlebarImageList";
 import dayjs from "dayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -37,7 +36,7 @@ function TabPanel(props) {
 function checkDate(maxDate, minDate, date) {
   var defaultDate = "";
 
-  var today = ''
+  var today = "";
   if (!!date) {
     today = moment(date["$d"]).format("YYYY-MM-DD");
   } else {
@@ -63,31 +62,32 @@ export default function BasicTabs(props) {
   const roverName = props.rover.name;
   const maxDate = props.rover["max_date"];
   const minDate = props.rover["landing_date"];
-  const startDate = useRef(dayjs(checkDate(maxDate, minDate))) 
+  const startDate = useRef(dayjs(checkDate(maxDate, minDate)));
   const [date, setDate] = useState(startDate.current);
   const [value, setValue] = useState(0);
   const loading = useRef(true);
- 
-;
 
   useEffect(() => {
     const newDate = dayjs(checkDate(maxDate, minDate, date));
     dispatch(fetchPhotosData(roverName, newDate));
-  }, [date, dispatch, maxDate, minDate,  roverName]);
+  }, [date, dispatch, maxDate, minDate, roverName]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  
-
   const cameraTabs = props.rover.cameras.map((cam, index) => (
-    <Tab sx={{ textDecoration: "none !important" }} key={cam.name + cam.id} label={cam.name} />
+    <Tab
+      className="camera-tab"
+      sx={{ textDecoration: "none !important" }}
+      key={cam.name + cam.id}
+      label={cam.name}
+    />
   ));
 
   let tabPanel = [];
   if (photos.length > 0) {
-    loading.current = false
+    loading.current = false;
     tabPanel = props.rover.cameras.map((cam, index) => {
       var filteredArray = photos.filter((p) => p.camera.name === cam.name);
 
@@ -141,6 +141,7 @@ export default function BasicTabs(props) {
   ) : (
     <Box sx={{ background: "white !important", width: "100%", height: "auto" }}>
       <Box
+        id="tabs-wrapper"
         sx={{
           borderBottom: 1,
           margin: 2,
@@ -150,31 +151,35 @@ export default function BasicTabs(props) {
           alignItems: "center",
         }}
       >
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            className="date-picker-wrapper"
+            label="Date"
+            value={checkDate(maxDate, minDate, date)}
+            onChange={(newValue) => {
+              loading.current = true;
+              const newDate = checkDate(maxDate, minDate, newValue);
+              setDate(newDate);
+            }}
+            maxDate={dayjs(maxDate)}
+            minDate={dayjs(minDate)}
+            format="YYYY-MM-DD"
+          />
+        </LocalizationProvider>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          sx={{ maxWidth: "80%" }}
+          id="camera-tabs-wrapper"
         >
-          <Tab label="All Cameras" sx={{ textDecoration: "none !important" }} />
+          <Tab
+            className="camera-tab"
+            label="All Cameras"
+            sx={{ textDecoration: "none !important" }}
+          />
           {cameraTabs}
         </Tabs>
-
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["DateField", "DateField"]}>
-            <DatePicker
-              label="Date"
-              value={checkDate(maxDate, minDate,date)}
-              onChange={(newValue) => {
-                loading.current= true
-                const newDate = checkDate(maxDate, minDate, newValue)
-                setDate(newDate);
-              }}
-              maxDate={dayjs(maxDate)}
-              minDate={dayjs(minDate)}
-              format="YYYY-MM-DD"
-            />
-          </DemoContainer>
-        </LocalizationProvider>
       </Box>
 
       <TabPanel

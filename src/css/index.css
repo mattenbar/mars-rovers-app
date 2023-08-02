@@ -99,4 +99,29 @@ button.MuiTab-root[aria-selected="true"] {
   li.MuiImageListItem-root {
     grid-column-end: span 2 !important;
   }
+  
+
+  
+}
+
+#tabs-wrapper{
+  flex-direction: column;
+}
+.MuiTabs-flexContainer{
+  justify-content: center;
+}
+#camera-tabs-wrapper{
+  max-width: 100%;
+}
+
+.date-picker-wrapper{
+  margin: 1rem !important;
+}
+
+@media (max-width: 750px) {
+  .camera-tab{
+    padding: 5px 5px !important;
+    font-size: smaller !important;
+  }
+
 }
