@@ -44,37 +44,7 @@ export default function App() {
       children: [
         { path: "/", element: <Home /> },
         {
-          path: "/curiosity",
-          element: (
-            <Rover
-              roverName="Curiosity"
-              
-              onOpenModal={handleOpenModal.bind(this)}
-            />
-          ),
-        },
-        {
-          path: "/spirit",
-          element: (
-            <Rover
-              roverName="Spirit"
-              
-              onOpenModal={handleOpenModal.bind(this)}
-            />
-          ),
-        },
-        {
-          path: "/opportunity",
-          element: (
-            <Rover
-              roverName="Opportunity"
-              
-              onOpenModal={handleOpenModal.bind(this)}
-            />
-          ),
-        },
-        {
-          path: "/perseverance",
+          path: "/rover/:name",
           element: (
             <Rover
               roverName="Perseverance"
@@ -82,7 +52,7 @@ export default function App() {
               onOpenModal={handleOpenModal.bind(this)}
             />
           ),
-        },
+        }
       ],
     },
   ]);

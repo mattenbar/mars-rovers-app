@@ -10,7 +10,7 @@ export default function Nav(props) {
       <NavLink
         className={({ isActive }) => (isActive ? classes.active : undefined)}
         fontFamily={"marsBold"}
-        to={"/" + c}
+        to={"/rover/" + c}
       >
         {c}
       </NavLink>

@@ -5,16 +5,16 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import BasicTabs from "./BasicTabs";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 
 
 function Rover(props) {
-
-  const rover = useSelector((state) => state.rovers.rovers.filter(r => r.name === props.roverName)[0])
+  const params = useParams()
+  const rover = useSelector((state) => state.rovers.rovers.filter(r => r.name === params.name)[0])
 
   return !!rover ? (
     <>
-    
      <Container
       maxWidth="80vw"
       sx={{ display: "flex", height: "auto", flexDirection: "column", padding: '0 !important' }}
