@@ -40,7 +40,6 @@ const ImageModal = (props) => {
         id="close-btn"
         onClick={props.onClose}
       />
-      {console.log(currentImg)}
       <ImageListItem
         key={`${currentImg.camera.name}_${props.img.id}`}
         id={currentImg.id}
