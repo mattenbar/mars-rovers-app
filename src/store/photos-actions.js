@@ -2,7 +2,7 @@ import { API_URL, API_KEY } from "../apiConstants";
 import { photosActions } from "./photos-slice";
 
 export const fetchPhotosData = (roverName,date) => {
-    //console.log('fetch start',roverName,date)
+   
   return async (dispatch) => {
     
     const fetchData = async () => {
@@ -33,7 +33,7 @@ export const fetchPhotosData = (roverName,date) => {
 
 
 export const clearPhotosData = () => {
-    //console.log('fetch start',roverName,date)
+
   return (dispatch) => {
     
     dispatch(photosActions.fetchPhotos([]));

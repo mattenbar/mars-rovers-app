@@ -7,11 +7,11 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useKeyPressEvent } from "react-use";
 
-const ImageModal = (props, onKeyPress) => {
+const ImageModal = (props) => {
   const [currentImg, setCurrentImg] = useState(props.img);
   const currentIndex = useRef(props.currentIndex);
 
-  const handleChange = (event, value) => {
+  const handleChange = (value) => {
     console.log(value)
     currentIndex.current = value - 1;
     setCurrentImg(props.photos[value - 1]);
