@@ -84,7 +84,7 @@ export default function RoverCard(props) {
         <Typography variant="body2" fontSize="16px" color="text.main">
           Photos: {props.rover.total_photos}
         </Typography>
-        <Link to={"/" + props.rover.name} fontSize="16px" underline="hover">
+        <Link to={"/rover/" + props.rover.name} fontSize="16px" underline="hover">
           {"View Images"}
         </Link>
       </CardContent>

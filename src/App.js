@@ -42,7 +42,7 @@ export default function App() {
       path: "/",
       element: <RootLayout closeModal={handleCloseEvent} modal={modal} />,
       children: [
-        { path: "/", element: <Home /> },
+        { index: true, element: <Home /> },
         {
           path: "/rover/:name",
           element: (
