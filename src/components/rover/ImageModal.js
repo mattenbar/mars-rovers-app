@@ -11,10 +11,9 @@ const ImageModal = (props) => {
   const [currentImg, setCurrentImg] = useState(props.img);
   const currentIndex = useRef(props.currentIndex);
 
-  const handleChange = (value) => {
-    console.log(value)
-    currentIndex.current = value - 1;
+  const handleChange = (event, value) => {
     setCurrentImg(props.photos[value - 1]);
+    currentIndex.current = value - 1;
   };
 
   const handleArrow = (event) => {
@@ -41,14 +40,14 @@ const ImageModal = (props) => {
         id="close-btn"
         onClick={props.onClose}
       />
-
+      {console.log(currentImg)}
       <ImageListItem
         key={`${currentImg.camera.name}_${props.img.id}`}
         id={currentImg.id}
         name={currentImg.camera.name}
         sx={{
           width: "100% !important",
-          height: 'auto',
+          height: "auto",
           maxHeight: "88% ",
           maxWidth: "fit-content !important ",
           alignSelf: "center !important ",
@@ -87,7 +86,7 @@ const ImageModal = (props) => {
               page={currentIndex.current + 1}
               onChange={handleChange}
               count={props.photos.length}
-              sx={{ backgroundColor: "black", }}
+              sx={{ backgroundColor: "black" }}
             />
           </Stack>
         }
