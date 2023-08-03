@@ -12,6 +12,7 @@ const ImageModal = (props, onKeyPress) => {
   const currentIndex = useRef(props.currentIndex);
 
   const handleChange = (event, value) => {
+    console.log(value)
     currentIndex.current = value - 1;
     setCurrentImg(props.photos[value - 1]);
   };
@@ -46,8 +47,8 @@ const ImageModal = (props, onKeyPress) => {
         id={currentImg.id}
         name={currentImg.camera.name}
         sx={{
-          width: "auto",
-          height: '100% !important',
+          width: "100% !important",
+          height: 'auto',
           maxHeight: "88% ",
           maxWidth: "fit-content !important ",
           alignSelf: "center !important ",
