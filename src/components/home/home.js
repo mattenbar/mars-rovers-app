@@ -1,19 +1,13 @@
 
-import { useSelector } from "react-redux";
 import RoverCard from "./roverCards";
 import Item from "@mui/material/Grid";
 import { Grid } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import {roversFetch} from '../../store/rover-actions'
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
-  const rovers = useSelector((state) => state.rovers);
-
-  return rovers.length === 0 ? (
-    <Box justifyContent="space-evenly" sx={{ width: "100%", display: "flex" }}>
-      <CircularProgress sx={{ width: "500px", height: "auto" }} />
-    </Box>
-  ) : (
+  const rovers = useLoaderData()
+  return (
     <Grid
       id="home-grid"
       sx={{ maxWidth: "100%", margin: "auto" }}
@@ -42,3 +36,8 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function roversLoader(){
+  const response = await roversFetch();
+  return response;
+}

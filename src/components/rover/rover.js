@@ -5,12 +5,15 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import BasicTabs from "./BasicTabs";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLoaderData } from "react-router-dom";
+import { fetchPhotosData } from '../../store/photos-actions'
+
 
 
 
 function Rover(props) {
   const params = useParams()
+  const data = useLoaderData()
   const rover = useSelector((state) => state.rovers.rovers.filter(r => r.name === params.name)[0])
 
   return !!rover ? (
@@ -35,5 +38,9 @@ function Rover(props) {
 }
 
 export default Rover;
+
+export function fetchPhotos(){
+
+}
 
 

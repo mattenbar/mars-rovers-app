@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/home/home";
 import RootLayout from "./pages/Root";
-import { useDispatch} from "react-redux";
-import { fetchRoversData } from "./store/rover-actions";
+import { useDispatch } from "react-redux";
 import Rover from "./components/rover/rover";
+import Home, {roversLoader} from './components/home/home'
 
 const initialState = {
   displayModal: false,
@@ -14,11 +13,9 @@ const initialState = {
 };
 
 export default function App() {
-  const dispatch = useDispatch();
   const [modal, setModal] = useState(initialState);
 
   const handleOpenModal = (currentIimg, currentIndex, photos) => {
-    
     return setModal({
       displayModal: true,
       img: currentIimg[0],
@@ -31,28 +28,22 @@ export default function App() {
     return setModal(initialState);
   };
 
-  useEffect(() => {
-    dispatch(fetchRoversData());
-  }, [dispatch]);
-
-
+ 
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: <RootLayout closeModal={handleCloseEvent} modal={modal} />,
       children: [
-        { index: true, element: <Home /> },
+        {
+          index: true,
+          element: <Home />,
+          loader: roversLoader
+        },
         {
           path: "/rover/:name",
-          element: (
-            <Rover
-              roverName="Perseverance"
-          
-              onOpenModal={handleOpenModal.bind(this)}
-            />
-          ),
-        }
+          element: <Rover onOpenModal={handleOpenModal.bind(this)} />,
+        },
       ],
     },
   ]);

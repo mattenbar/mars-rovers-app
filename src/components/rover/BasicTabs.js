@@ -12,6 +12,7 @@ import moment from "moment-hijri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotosData, clearPhotosData } from "../../store/photos-actions";
+import { photosFetch } from "../../store/photos-actions";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -204,4 +205,9 @@ export default function BasicTabs(props) {
       {tabPanel}
     </Box>
   );
+}
+
+export async function photosLoader(){
+  const response = await photosFetch();
+  return response;
 }
