@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchRoversData } from "./store/rover-actions";
 import Rover from "./components/rover/rover";
 import Home, { roversLoader } from "./components/home/home";
-import { photosLoader } from "./components/rover/BasicTabs";
+
 
 const initialState = {
   displayModal: false,
@@ -47,7 +47,8 @@ export default function App() {
           element: <Home />,
         },
         {
-          path: "/rover/:name",
+          id:"rover",
+          path: "/rover/:roverName",
           element: <Rover onOpenModal={handleOpenModal.bind(this)} />,
 
         },
