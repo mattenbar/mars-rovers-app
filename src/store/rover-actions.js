@@ -1,9 +1,6 @@
 import { API_URL, API_KEY } from "../apiConstants";
 import { roversActions } from "./rovers-slice";
 
-
-
-
 export  const roversFetch = async () => {
   const response = await fetch(API_URL + API_KEY);
 
@@ -15,7 +12,6 @@ export  const roversFetch = async () => {
 
   return roverData;
 };
-
 
 export const fetchRoversData = () => {
   return async (dispatch) => {

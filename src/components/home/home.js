@@ -3,10 +3,10 @@ import RoverCard from "./roverCards";
 import Item from "@mui/material/Grid";
 import { Grid } from "@mui/material";
 import {roversFetch} from '../../store/rover-actions'
-import { useLoaderData } from "react-router-dom";
+import { useRouteLoaderData } from "react-router-dom";
 
 const Home = () => {
-  const rovers = useLoaderData()
+  const rovers = useRouteLoaderData("root");
   return (
     <Grid
       id="home-grid"

@@ -6,18 +6,22 @@ import ListSubheader from "@mui/material/ListSubheader";
 import BasicTabs from "./BasicTabs";
 import { useSelector } from "react-redux";
 import { useParams, useLoaderData } from "react-router-dom";
-import { fetchPhotosData } from '../../store/photos-actions'
-
+import { useRouteLoaderData } from "react-router-dom";
+import { photosFetch } from "../../store/photos-actions";
 
 
 
 function Rover(props) {
   const params = useParams()
   const data = useLoaderData()
-  const rover = useSelector((state) => state.rovers.rovers.filter(r => r.name === params.name)[0])
+  const rovers = useRouteLoaderData("root");
+  const rover = rovers.rovers.filter(r => r.name === params.name)[0]
 
-  return !!rover ? (
+  // return<>{console.log(rover)}</>
+
+  return rover ? (
     <>
+    {console.log(data)}
      <Container
       maxWidth="80vw"
       sx={{ display: "flex", height: "auto", flexDirection: "column", padding: '0 !important' }}
@@ -33,14 +37,16 @@ function Rover(props) {
     </>
    
   ) : (
-    <></>
+    <>{console.log(params.name)}</>
   );
 }
 
 export default Rover;
 
-export function fetchPhotos(){
+export async function photosLoader(roverName){
 
+  const response = await photosFetch(roverName);
+  return response;
 }
 
 

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import { useDispatch } from "react-redux";
+import { fetchRoversData } from "./store/rover-actions";
 import Rover from "./components/rover/rover";
-import Home, {roversLoader} from './components/home/home'
+import Home, { roversLoader } from "./components/home/home";
+import { photosLoader } from "./components/rover/BasicTabs";
 
 const initialState = {
   displayModal: false,
@@ -13,6 +15,7 @@ const initialState = {
 };
 
 export default function App() {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(initialState);
 
   const handleOpenModal = (currentIimg, currentIndex, photos) => {
@@ -28,21 +31,25 @@ export default function App() {
     return setModal(initialState);
   };
 
- 
+  useEffect(() => {
+    dispatch(fetchRoversData());
+  }, [dispatch]);
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: <RootLayout closeModal={handleCloseEvent} modal={modal} />,
+      id: "root",
+      loader: roversLoader,
       children: [
         {
           index: true,
           element: <Home />,
-          loader: roversLoader
         },
         {
           path: "/rover/:name",
           element: <Rover onOpenModal={handleOpenModal.bind(this)} />,
+
         },
       ],
     },
