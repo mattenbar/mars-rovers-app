@@ -13,7 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotosData, clearPhotosData } from "../../store/photos-actions";
 import { useSearchParams } from "react-router-dom";
-import { validateDate } from "@mui/x-date-pickers/internals";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,17 +82,15 @@ export default function BasicTabs(props) {
 
     if(newDate === "BEFORE"){
       setSearchParams({ date: minDate })
-      
     }
 
     if(newDate === "AFTER"){
       setSearchParams({ date: maxDate })
-     
     }
 
     dispatch(fetchPhotosData(roverName, newDate));
     
-  }, [validDate, currentDate, dispatch, maxDate, minDate, roverName, searchParams, loading]);
+  }, [validDate, currentDate, dispatch, maxDate, minDate, roverName, searchParams, setSearchParams, loading]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

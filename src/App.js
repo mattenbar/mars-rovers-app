@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchRoversData } from "./store/rover-actions";
 // import Rover, {action as roverAction} from "./components/rover/rover";
 import Home, { roversLoader } from "./components/home/home";
-import RoverPage, {action as roverAction} from "./pages/roverPage";
+import RoverPage from "./pages/roverPage";
 
 
 const initialState = {
