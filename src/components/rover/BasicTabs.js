@@ -12,6 +12,8 @@ import moment from "moment-hijri";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotosData, clearPhotosData } from "../../store/photos-actions";
+import { useSearchParams } from "react-router-dom";
+import { validateDate } from "@mui/x-date-pickers/internals";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -34,25 +36,25 @@ function TabPanel(props) {
 }
 
 function checkDate(maxDate, minDate, date) {
-  var defaultDate = "";
-
-  var today = "";
-  if (!!date) {
-    today = moment(date["$d"]).format("YYYY-MM-DD");
-  } else {
-    today = moment().format("YYYY-MM-DD");
+  let returnDate;
+  
+  if (!date) {
+    date = moment(minDate).format("YYYY-MM-DD");
+    returnDate = dayjs(date);
+    return returnDate;
   }
 
-  if (moment(today).isAfter(moment(maxDate).format("YYYY-MM-DD"))) {
-    defaultDate = moment(maxDate).format("YYYY-MM-DD");
-  } else if (moment(today).isBefore(moment(minDate).format("YYYY-MM-DD"))) {
-    defaultDate = moment(minDate).format("YYYY-MM-DD");
-  } else {
-    defaultDate = today;
-  }
+ 
+  date = moment(date).format("YYYY-MM-DD");
 
-  defaultDate = dayjs(defaultDate);
-  return defaultDate;
+  if (moment(date).isAfter(moment(maxDate).format("YYYY-MM-DD"))) {
+    return "AFTER";
+  } else if (moment(date).isBefore(moment(minDate).format("YYYY-MM-DD"))) {
+    return "BEFORE";
+  }
+  returnDate = dayjs(date);
+
+  return returnDate;
 }
 
 export default function BasicTabs(props) {
@@ -61,18 +63,36 @@ export default function BasicTabs(props) {
   const roverName = props.rover.name;
   const maxDate = props.rover["max_date"];
   const minDate = props.rover["landing_date"];
-  const startDate = useRef(dayjs(checkDate(maxDate, minDate)));
-  const [date, setDate] = useState(startDate.current);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentDate = searchParams.get("date");
+  
   const [value, setValue] = useState(0);
   const loading = useRef(true);
+  const validDate = useRef(checkDate(maxDate, minDate, currentDate))
 
   useEffect(() => {
-    dispatch(clearPhotosData())
-    loading.current = true
-    setValue(0)
-    const newDate = dayjs(checkDate(maxDate, minDate, date));
+    loading.current = true;
+    dispatch(clearPhotosData());
+    setValue(0);
+
+    if(currentDate == null){
+      setSearchParams({ date: minDate });
+    }
+    const newDate = checkDate(maxDate, minDate, currentDate);
+
+    if(newDate === "BEFORE"){
+      setSearchParams({ date: minDate })
+      
+    }
+
+    if(newDate === "AFTER"){
+      setSearchParams({ date: maxDate })
+     
+    }
+
     dispatch(fetchPhotosData(roverName, newDate));
-  }, [date, dispatch, maxDate, minDate, roverName]);
+    
+  }, [validDate, currentDate, dispatch, maxDate, minDate, roverName, searchParams, loading]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -111,11 +131,13 @@ export default function BasicTabs(props) {
         );
       } else {
         return (
+          
           <TabPanel
             key={`${cam.name}-${index}`}
             value={value}
             index={index + 1}
           >
+            
             No Images
           </TabPanel>
         );
@@ -123,7 +145,11 @@ export default function BasicTabs(props) {
     });
   }
 
-  return loading.current ? (
+  if(validDate.current !== 'BEFORE' && validDate.current !== 'AFTER'){
+    loading.current = false
+  }
+
+  return loading.current && (validDate.current === 'BEFORE' || validDate.current === 'AFTER') ? (
     <Box
       justifyContent="space-evenly"
       sx={{
@@ -132,6 +158,7 @@ export default function BasicTabs(props) {
         display: "flex",
       }}
     >
+      
       <CircularProgress
         sx={{
           background: "transparent !important",
@@ -157,11 +184,12 @@ export default function BasicTabs(props) {
           <DatePicker
             className="date-picker-wrapper"
             label="Date"
-            value={checkDate(maxDate, minDate, date)}
+            value={dayjs(currentDate)}
             onChange={(newValue) => {
               loading.current = true;
-              const newDate = checkDate(maxDate, minDate, newValue);
-              setDate(newDate);
+              
+              const formatedValue = moment(newValue["$d"]).format("YYYY-MM-DD");
+              setSearchParams({ date: formatedValue });
             }}
             maxDate={dayjs(maxDate)}
             minDate={dayjs(minDate)}

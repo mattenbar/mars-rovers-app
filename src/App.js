@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import { useDispatch } from "react-redux";
 import { fetchRoversData } from "./store/rover-actions";
-import Rover from "./components/rover/rover";
+// import Rover, {action as roverAction} from "./components/rover/rover";
 import Home, { roversLoader } from "./components/home/home";
+import RoverPage, {action as roverAction} from "./pages/roverPage";
 
 
 const initialState = {
@@ -49,8 +50,8 @@ export default function App() {
         {
           id:"rover",
           path: "/rover/:roverName",
-          element: <Rover onOpenModal={handleOpenModal.bind(this)} />,
-
+          element: <RoverPage onOpenModal={handleOpenModal.bind(this)} />,
+          
         },
       ],
     },
