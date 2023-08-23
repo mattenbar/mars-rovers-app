@@ -39,5 +39,6 @@ export default Home;
 
 export async function roversLoader(){
   const response = await roversFetch();
+
   return response;
 }

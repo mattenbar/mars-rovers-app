@@ -3,9 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import { useDispatch } from "react-redux";
 import { fetchRoversData } from "./store/rover-actions";
-// import Rover, {action as roverAction} from "./components/rover/rover";
 import Home, { roversLoader } from "./components/home/home";
-import RoverPage from "./pages/roverPage";
+import RoverPage, {action as photosLoader} from "./pages/roverPage";
 
 
 const initialState = {
@@ -18,6 +17,7 @@ const initialState = {
 export default function App() {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(initialState);
+
 
   const handleOpenModal = (currentIimg, currentIndex, photos) => {
     return setModal({
@@ -34,7 +34,9 @@ export default function App() {
 
   useEffect(() => {
     dispatch(fetchRoversData());
+    
   }, [dispatch]);
+  
 
   const router = createBrowserRouter([
     {
@@ -51,7 +53,7 @@ export default function App() {
           id:"rover",
           path: "/rover/:roverName",
           element: <RoverPage onOpenModal={handleOpenModal.bind(this)} />,
-          
+          loader: photosLoader
         },
       ],
     },
